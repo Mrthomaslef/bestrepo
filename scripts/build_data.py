@@ -39,6 +39,39 @@ def graphql(query: str, tok: str) -> dict:
         return json.loads(r.read())
 
 
+LEVEL = {1: "facile", 2: "moyen", 3: "avancé"}
+
+
+def stars(n: int) -> str:
+    return f"{n / 1000:.0f}k" if n >= 1000 else str(n)
+
+
+def write_catalog(payload: dict) -> None:
+    """Catalogue compact lu par les agents (skill bestrepo-advisor)."""
+    lines = [
+        "# Catalogue BestRepo — dépôts recommandés pour les projets de Thomas",
+        "",
+        f"_Généré le {payload['generatedAt'][:10]} par scripts/build_data.py — ne pas éditer à la main "
+        "(modifier scripts/curated.py)._",
+        "",
+        "Format : `owner/repo` (★ étoiles · niveau · type) — à quoi ça sert · **Pour Thomas :** usage · `démarrage`",
+    ]
+    for c in payload["categories"]:
+        items = sorted((r for r in payload["repos"] if r["cat"] == c["id"]), key=lambda r: -r["stars"])
+        if not items:
+            continue
+        lines += ["", f"## {c['emoji']} {c['title']} (`{c['id']}`)", f"_{c['intro']}_", ""]
+        for r in items:
+            flag = " ⭐" if r["pick"] else ""
+            flag += " ⚠️archivé" if r["archived"] else ""
+            inst = f" · `{r['install']}`" if r["install"] else ""
+            lines.append(
+                f"- `{r['repo']}`{flag} (★{stars(r['stars'])} · {LEVEL[r['level']]} · {r['kind']}) — "
+                f"{r['why']} **Pour Thomas :** {r['use']}{inst}"
+            )
+    (ROOT / "CATALOG.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
 def main() -> int:
     tok = token()
     seen, entries = set(), []
@@ -99,6 +132,8 @@ def main() -> int:
     js = json.dumps(payload, ensure_ascii=False, indent=1)
     (ROOT / "data" / "repos.json").write_text(js + "\n", encoding="utf-8")
     (ROOT / "data" / "embedded_data.js").write_text(f"window.BESTREPO_DATA = {js};\n", encoding="utf-8")
+
+    write_catalog(payload)
 
     print(f"{len(out)} dépôts écrits · {sum(r['stars'] for r in out):,} étoiles au total")
     if missing:

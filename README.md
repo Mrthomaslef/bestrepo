@@ -11,3 +11,9 @@ Les dépôts GitHub les plus étoilés, classés par centre d'intérêt (IA loca
 - Ajouter/modifier un dépôt : `scripts/curated.py`
 - Régénérer les données (étoiles, activité) : `python3 scripts/build_data.py`
 - Actualisation automatique chaque lundi via GitHub Actions.
+
+## Pour les agents IA
+
+- `CATALOG.md` : catalogue compact (régénéré avec les données) lu par les agents.
+- `skill/bestrepo-advisor/` : skill qui fait proposer 2 à 5 dépôts pertinents quand Thomas conçoit un projet
+  (lié par symlink dans `~/.claude/skills`, `~/.agents/skills`, `~/.codex/skills`).
