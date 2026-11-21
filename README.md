@@ -1,5 +1,13 @@
 <img src="assets/icon.svg" width="64" height="64" alt="">
 
-# Bestrepo
+# BestRepo
 
-Created in [T3 Code](https://t3.codes).
+Les dépôts GitHub les plus étoilés, classés par centre d'intérêt (IA locale, agents, imagerie médicale/DICOM, Second Brain, web-apps, auto-hébergement, Mac, médias, jeux, sécurité, finances, apprentissage), avec pour chacun **à quoi ça sert**, **comment l'utiliser concrètement** et la commande pour démarrer.
+
+👉 https://mrthomaslef.github.io/bestrepo/
+
+## Mettre à jour
+
+- Ajouter/modifier un dépôt : `scripts/curated.py`
+- Régénérer les données (étoiles, activité) : `python3 scripts/build_data.py`
+- Actualisation automatique chaque lundi via GitHub Actions.

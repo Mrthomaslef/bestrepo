@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BestRepo — Les meilleurs dépôts GitHub, et comment t'en servir</title>
+<meta name="description" content="Sélection des dépôts GitHub les plus étoilés, classés par centre d'intérêt, avec pour chacun comment l'utiliser concrètement.">
+<meta name="theme-color" content="#0b1020" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f6f7fb" media="(prefers-color-scheme: light)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="BestRepo">
+<link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<style>
+:root{
+  --bg:#f6f7fb; --bg2:#ffffff; --ink:#141826; --ink2:#4a5168; --ink3:#8a90a6; --line:#e4e7f0;
+  --acc:#f59e0b; --acc2:#7c3aed; --accbg:#fff7e6; --usebg:#f3efff; --useink:#4c1d95;
+  --chip:#eef0f6; --shadow:0 1px 2px rgba(20,24,38,.06),0 6px 24px rgba(20,24,38,.06);
+  --r:16px;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#0b1020; --bg2:#131a2e; --ink:#eef1fa; --ink2:#b4bad0; --ink3:#7d849e; --line:#232c45;
+  --accbg:#2a2110; --usebg:#1f1838; --useink:#d9ccff; --chip:#1b2340; --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.35);
+}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overscroll-behavior-y:contain}
+body{margin:0;font:15px/1.5 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden;overscroll-behavior-y:contain}
+button,a,input,select{touch-action:manipulation;font:inherit;color:inherit}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px}
+
+/* pull to refresh */
+#ptr{position:fixed;left:50%;top:0;transform:translate(-50%,-60px);z-index:50;background:var(--bg2);border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-size:13px;color:var(--ink2);box-shadow:var(--shadow);transition:transform .2s}
+#ptr.spin .ic{display:inline-block;animation:sp 0.8s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+header.hero{padding:calc(28px + env(safe-area-inset-top)) 0 10px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand img{width:48px;height:48px;border-radius:12px;box-shadow:var(--shadow)}
+.brand h1{font-size:24px;line-height:1.15;margin:0;letter-spacing:-.02em}
+.brand p{margin:2px 0 0;color:var(--ink2);font-size:14px}
+.stats{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 0}
+.stat{background:var(--bg2);border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:13px;color:var(--ink2)}
+.stat b{color:var(--ink)}
+
+.bar{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:saturate(1.4) blur(12px);-webkit-backdrop-filter:saturate(1.4) blur(12px);border-bottom:1px solid var(--line);padding:10px 0;padding-top:calc(10px + env(safe-area-inset-top))}
+.searchrow{display:flex;gap:8px}
+.search{flex:1;min-width:0;position:relative}
+.search input{width:100%;height:42px;border-radius:12px;border:1px solid var(--line);background:var(--bg2);padding:0 12px 0 38px;font-size:16px;outline:none}
+.search input:focus{border-color:var(--acc)}
+.search svg{position:absolute;left:12px;top:12px;color:var(--ink3)}
+select{height:42px;border-radius:12px;border:1px solid var(--line);background:var(--bg2);padding:0 8px;font-size:14px;max-width:140px}
+.chips{display:flex;gap:6px;overflow-x:auto;padding:10px 0 2px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;border:1px solid var(--line);background:var(--bg2);border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer;white-space:nowrap;color:var(--ink2)}
+.chip .n{opacity:.6;margin-left:4px;font-variant-numeric:tabular-nums}
+.chip.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.filters{display:flex;gap:6px;overflow-x:auto;padding-top:6px;scrollbar-width:none}.filters::-webkit-scrollbar{display:none}.tg{flex:none;white-space:nowrap}
+.hint{font-size:13px;color:var(--ink2)}
+.tg{border:1px dashed var(--line);background:transparent;border-radius:999px;padding:4px 10px;font-size:12.5px;cursor:pointer;color:var(--ink2)}
+.tg.on{border-style:solid;border-color:var(--acc);background:var(--accbg);color:var(--ink)}
+
+/* guide */
+details.guide{margin:18px 0 4px;background:var(--bg2);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow)}
+details.guide summary{cursor:pointer;padding:14px 16px;font-weight:600;list-style:none;display:flex;justify-content:space-between;align-items:center}
+details.guide summary::-webkit-details-marker{display:none}
+details.guide summary::after{content:"＋";color:var(--ink3)}
+details.guide[open] summary::after{content:"－"}
+.gbody{padding:0 16px 16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.gcard{border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:13.5px;color:var(--ink2)}
+.gcard b{display:block;color:var(--ink);margin-bottom:2px;font-size:14px}
+.gcard code{font-size:12px;background:var(--chip);padding:1px 5px;border-radius:5px;word-break:break-all}
+
+section.cat{margin:28px 0 8px}
+.cathead{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.cathead h2{margin:0;font-size:20px;letter-spacing:-.01em}
+.cathead .cnt{color:var(--ink3);font-size:13px}
+.intro{color:var(--ink2);margin:4px 0 12px;font-size:14px;max-width:760px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px}
+@media (max-width:380px){.grid{grid-template-columns:1fr}}
+
+.card{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r);padding:14px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:9px;min-width:0}
+.card.pick{border-color:color-mix(in srgb,var(--acc) 55%,var(--line))}
+.top{display:flex;gap:10px;align-items:center;min-width:0}
+.top img{width:36px;height:36px;border-radius:9px;flex:none;background:var(--chip)}
+.tt{min-width:0;flex:1}
+.name{font-weight:650;font-size:15.5px;text-decoration:none;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.name:hover{color:var(--acc2)}
+.owner{color:var(--ink3);font-size:12.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.star{flex:none;display:flex;align-items:center;gap:4px;font-weight:650;font-size:14px;font-variant-numeric:tabular-nums}
+.star svg{color:var(--acc)}
+.why{margin:0;font-size:14px;color:var(--ink)}
+.use{margin:0;background:var(--usebg);color:var(--useink);border-radius:10px;padding:8px 10px;font-size:13.5px}
+.use b{font-weight:650}
+.inst{display:flex;gap:6px;align-items:stretch;min-width:0}
+.inst code{flex:1;min-width:0;font:12px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--chip);border-radius:8px;padding:7px 9px;overflow-x:auto;white-space:nowrap;scrollbar-width:none}
+.inst code::-webkit-scrollbar{display:none}
+.inst button{flex:none;border:1px solid var(--line);background:var(--bg2);border-radius:8px;padding:0 10px;font-size:12px;cursor:pointer}
+.meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:12px;color:var(--ink3);margin-top:auto}
+.b{border-radius:6px;padding:2px 7px;background:var(--chip);color:var(--ink2);white-space:nowrap}
+.b.l1{background:#dcfce7;color:#166534}.b.l2{background:#fef3c7;color:#92400e}.b.l3{background:#fee2e2;color:#991b1b}
+@media (prefers-color-scheme:dark){.b.l1{background:#11301e;color:#86efac}.b.l2{background:#33270c;color:#fcd34d}.b.l3{background:#3a1515;color:#fca5a5}}
+.dot{width:9px;height:9px;border-radius:50%;display:inline-block;margin-right:4px;vertical-align:-1px}
+.links{margin-left:auto;display:flex;gap:10px}
+.links a{color:var(--ink2);text-decoration:none;font-weight:550}
+.links a:hover{color:var(--acc2)}
+.empty{text-align:center;color:var(--ink3);padding:40px 0}
+footer{color:var(--ink3);font-size:12.5px;text-align:center;padding:36px 0 calc(36px + env(safe-area-inset-bottom))}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));transform:translateX(-50%) translateY(80px);background:var(--ink);color:var(--bg);padding:8px 14px;border-radius:999px;font-size:13px;transition:transform .2s;z-index:60}
+.toast.on{transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+<div id="ptr"><span class="ic">↻</span> <span class="tx">Tirer pour actualiser</span></div>
+
+<header class="hero wrap">
+  <div class="brand">
+    <img src="assets/icon.svg" alt="">
+    <div>
+      <h1>BestRepo</h1>
+      <p>Les dépôts GitHub les plus étoilés, triés par centre d'intérêt, et <b>comment toi tu peux t'en servir</b>.</p>
+    </div>
+  </div>
+  <div class="stats" id="stats"></div>
+</header>
+
+<div class="bar">
+  <div class="wrap">
+    <div class="searchrow">
+      <label class="search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="q" type="search" placeholder="Chercher : DICOM, photos, budget, Obsidian…" autocomplete="off" enterkeyhint="search">
+      </label>
+      <select id="sort" aria-label="Trier">
+        <option value="stars">★ Étoiles</option>
+        <option value="recent">Actifs récemment</option>
+        <option value="easy">Plus faciles</option>
+        <option value="az">A → Z</option>
+      </select>
+    </div>
+    <div class="chips" id="chips"></div>
+    <div class="filters" id="filters"></div>
+  </div>
+</div>
+
+<main class="wrap">
+  <details class="guide">
+    <summary>🧭 Comment utiliser un dépôt GitHub ? (2 min)</summary>
+    <div class="gbody">
+      <div class="gcard"><b>📦 App</b>Une vraie application à installer. Va dans <i>Releases</i> du dépôt, ou en une ligne : <code>brew install --cask nom</code></div>
+      <div class="gcard"><b>⌨️ Ligne de commande</b>Un outil qu'on tape dans le Terminal. Copie la commande affichée sur la carte (bouton <i>Copier</i>) et colle-la.</div>
+      <div class="gcard"><b>🏠 Auto-hébergé</b>Un service qui tourne chez toi (Mac, mini-PC) via Docker. Installe <code>OrbStack</code> ou Docker Desktop, puis la commande indiquée.</div>
+      <div class="gcard"><b>🧩 Bibliothèque</b>Une brique pour coder tes apps. Le plus simple : demande à ton agent T3 « utilise &lt;nom&gt; dans mon projet ».</div>
+      <div class="gcard"><b>🔌 Extension</b>Un module pour un logiciel existant (Obsidian, Zotero, navigateur, Claude Code).</div>
+      <div class="gcard"><b>📋 Liste</b>Rien à installer : une page de référence à parcourir et à garder en favori.</div>
+      <div class="gcard"><b>🟢🟡🔴 Niveau</b>🟢 Facile = télécharger · 🟡 Moyen = terminal/Docker · 🔴 Avancé = code Python/JS.</div>
+      <div class="gcard"><b>★ Étoiles</b>Les « likes » de GitHub : plus il y en a, plus le projet est populaire, maintenu et fiable.</div>
+    </div>
+  </details>
+  <div id="list"></div>
+</main>
+
+<footer class="wrap" id="foot"></footer>
+<div class="toast" id="toast"></div>
+
+<script src="data/embedded_data.js"></script>
+<script>
+const KIND = {app:"📦 App", cli:"⌨️ Commande", lib:"🧩 Bibliothèque", selfhost:"🏠 Auto-hébergé", extension:"🔌 Extension", liste:"📋 Liste"};
+const LEVEL = {1:"🟢 Facile", 2:"🟡 Moyen", 3:"🔴 Avancé"};
+const S = {cat:"all", q:"", sort:"stars", pick:false, easy:false, kind:""};
+let DATA = window.BESTREPO_DATA || {categories:[], repos:[]};
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fmt = n => n >= 1e6 ? (n/1e6).toFixed(1).replace(".0","")+" M" : n >= 1e3 ? (n/1e3).toFixed(n>=1e5?0:1).replace(".0","")+" k" : String(n);
+const norm = s => String(s||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");
+function ago(iso){
+  const d = (Date.now() - new Date(iso)) / 864e5;
+  if (d < 1) return "aujourd'hui"; if (d < 2) return "hier";
+  if (d < 31) return `il y a ${Math.round(d)} j`;
+  if (d < 365) return `il y a ${Math.round(d/30)} mois`;
+  return `il y a ${(d/365).toFixed(1).replace(".0","")} an(s)`;
+}
+
+function readHash(){
+  const h = decodeURIComponent(location.hash.slice(1));
+  S.cat = DATA.categories.some(c => c.id === h) || h === "picks" ? h : "all";
+}
+
+function filtered(){
+  const q = norm(S.q).trim();
+  let r = DATA.repos.filter(x =>
+    (S.cat === "all" || S.cat === "picks" ? true : x.cat === S.cat) &&
+    (!(S.pick || S.cat === "picks") || x.pick) &&
+    (!S.easy || x.level === 1) &&
+    (!S.kind || x.kind === S.kind) &&
+    (!q || q.split(/\s+/).every(w => norm([x.repo, x.why, x.use, x.desc, x.lang, KIND[x.kind], catOf(x.cat).title].join(" ")).includes(w)))
+  );
+  const by = {
+    stars: (a,b) => b.stars - a.stars,
+    recent: (a,b) => b.pushedAt.localeCompare(a.pushedAt),
+    easy: (a,b) => a.level - b.level || b.stars - a.stars,
+    az: (a,b) => a.repo.localeCompare(b.repo),
+  }[S.sort];
+  return r.sort(by);
+}
+const isCmd = t => /^(brew|npm|npx|pip|docker|curl|git |\/bin|<script|python|ollama)/.test(t);
+const catOf = id => DATA.categories.find(c => c.id === id) || {title:"", emoji:""};
+
+function renderChrome(){
+  const total = DATA.repos.reduce((s,r) => s + r.stars, 0);
+  $("#stats").innerHTML =
+    `<span class="stat"><b>${DATA.repos.length}</b> dépôts</span>` +
+    `<span class="stat"><b>${DATA.categories.length}</b> catégories</span>` +
+    `<span class="stat"><b>${fmt(total)}</b> ★ cumulées</span>` +
+    `<span class="stat">⭐ <b>${DATA.repos.filter(r=>r.pick).length}</b> coups de cœur</span>`;
+  const counts = id => DATA.repos.filter(r => r.cat === id).length;
+  $("#chips").innerHTML =
+    `<button class="chip" data-c="all">Tout<span class="n">${DATA.repos.length}</span></button>` +
+    `<button class="chip" data-c="picks">⭐ Par où commencer<span class="n">${DATA.repos.filter(r=>r.pick).length}</span></button>` +
+    DATA.categories.map(c => `<button class="chip" data-c="${c.id}">${c.emoji} ${esc(c.title)}<span class="n">${counts(c.id)}</span></button>`).join("");
+  $("#filters").innerHTML =
+    `<button class="tg" data-f="pick">⭐ Coups de cœur</button><button class="tg" data-f="easy">🟢 Faciles seulement</button>` +
+    Object.entries(KIND).map(([k,v]) => `<button class="tg" data-k="${k}">${v}</button>`).join("");
+  const d = new Date(DATA.generatedAt);
+  $("#foot").innerHTML = `Étoiles et activité mises à jour le ${d.toLocaleDateString("fr-FR",{day:"numeric",month:"long",year:"numeric"})} · ` +
+    `<a href="https://github.com/Mrthomaslef/bestrepo">Code source</a> · <a href="https://mrthomaslef.github.io/allinone/">Tapp Store</a>`;
+}
+
+function card(x){
+  const site = x.homepage && !/github\.com\/[^/]+\/[^/]+\/?$/.test(x.homepage) ? `<a href="${esc(x.homepage)}" target="_blank" rel="noopener">Site ↗</a>` : "";
+  return `<article class="card${x.pick?" pick":""}">
+    <div class="top">
+      <img src="${esc(x.avatar)}&s=72" alt="" loading="lazy" width="36" height="36">
+      <div class="tt"><a class="name" href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.repo.split("/")[1])}</a><div class="owner">${esc(x.repo.split("/")[0])}${x.pick?" · ⭐ coup de cœur":""}</div></div>
+      <div class="star" title="${x.stars.toLocaleString("fr-FR")} étoiles"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9z"/></svg>${fmt(x.stars)}</div>
+    </div>
+    <p class="why">${esc(x.why)}</p>
+    <p class="use"><b>Pour toi :</b> ${esc(x.use)}</p>
+    ${!x.install ? "" : isCmd(x.install) ? `<div class="inst"><code>${esc(x.install)}</code><button data-copy="${esc(x.install)}">Copier</button></div>` : `<div class="hint">▶ ${esc(x.install)}</div>`}
+    <div class="meta">
+      <span class="b l${x.level}">${LEVEL[x.level]}</span><span class="b">${KIND[x.kind]}</span>
+      ${x.lang ? `<span><span class="dot" style="background:${esc(x.langColor||"#999")}"></span>${esc(x.lang)}</span>` : ""}
+      <span title="Dernière activité">⟳ ${ago(x.pushedAt)}</span>
+      <span class="links">${site}<a href="${esc(x.url)}" target="_blank" rel="noopener">GitHub ↗</a></span>
+    </div>
+  </article>`;
+}
+
+function render(){
+  document.querySelectorAll(".chip").forEach(b => b.classList.toggle("on", b.dataset.c === S.cat));
+  document.querySelectorAll(".tg[data-f]").forEach(b => b.classList.toggle("on", S[b.dataset.f]));
+  document.querySelectorAll(".tg[data-k]").forEach(b => b.classList.toggle("on", S.kind === b.dataset.k));
+  const list = filtered();
+  if (!list.length) { $("#list").innerHTML = `<p class="empty">Aucun dépôt ne correspond. Essaie un autre mot ou retire un filtre.</p>`; return; }
+  const flat = S.q || S.cat !== "all" || S.sort !== "stars";
+  if (flat && S.cat !== "all" && S.cat !== "picks" && !S.q) {
+    const c = catOf(S.cat);
+    $("#list").innerHTML = `<section class="cat"><div class="cathead"><h2>${c.emoji} ${esc(c.title)}</h2><span class="cnt">${list.length} dépôts</span></div><p class="intro">${esc(c.intro)}</p><div class="grid">${list.map(card).join("")}</div></section>`;
+  } else if (flat) {
+    const title = S.cat === "picks" ? "⭐ Par où commencer — les coups de cœur" : S.q ? `Résultats pour « ${esc(S.q)} »` : "Tous les dépôts";
+    $("#list").innerHTML = `<section class="cat"><div class="cathead"><h2>${title}</h2><span class="cnt">${list.length} dépôts</span></div><div class="grid">${list.map(card).join("")}</div></section>`;
+  } else {
+    $("#list").innerHTML = DATA.categories.map(c => {
+      const items = list.filter(x => x.cat === c.id);
+      if (!items.length) return "";
+      return `<section class="cat" id="s-${c.id}"><div class="cathead"><h2>${c.emoji} ${esc(c.title)}</h2><span class="cnt">${items.length} dépôts</span></div><p class="intro">${esc(c.intro)}</p><div class="grid">${items.map(card).join("")}</div></section>`;
+    }).join("");
+  }
+}
+
+function toast(t){ const el=$("#toast"); el.textContent=t; el.classList.add("on"); clearTimeout(toast.t); toast.t=setTimeout(()=>el.classList.remove("on"),1600); }
+
+document.addEventListener("click", e => {
+  const c = e.target.closest(".chip");
+  if (c) { S.cat = c.dataset.c; history.replaceState(null,"", S.cat==="all" ? location.pathname : "#"+S.cat); render(); window.scrollTo({top: $(".bar").offsetTop, behavior:"smooth"}); return; }
+  const f = e.target.closest(".tg[data-f]"); if (f) { S[f.dataset.f] = !S[f.dataset.f]; render(); return; }
+  const k = e.target.closest(".tg[data-k]"); if (k) { S.kind = S.kind === k.dataset.k ? "" : k.dataset.k; render(); return; }
+  const cp = e.target.closest("[data-copy]");
+  if (cp) { navigator.clipboard?.writeText(cp.dataset.copy).then(()=>toast("Commande copiée ✓"), ()=>toast("Copie impossible")); navigator.vibrate?.(10); }
+});
+let qt; $("#q").addEventListener("input", e => { clearTimeout(qt); qt = setTimeout(() => { S.q = e.target.value; render(); }, 120); });
+$("#sort").addEventListener("change", e => { S.sort = e.target.value; render(); });
+window.addEventListener("hashchange", () => { readHash(); render(); });
+
+async function refresh(){
+  try {
+    const r = await fetch("data/repos.json?t=" + Date.now(), {cache:"no-store"});
+    if (r.ok) { DATA = await r.json(); renderChrome(); render(); return true; }
+  } catch(_) {}
+  return false;
+}
+
+/* Pull-to-refresh tactile + souris */
+(() => {
+  const el = $("#ptr"), TH = 70; let y0 = null, dy = 0, busy = false;
+  const start = y => { if (window.scrollY <= 0 && !busy) { y0 = y; dy = 0; } };
+  const move = y => { if (y0 === null) return; dy = Math.max(0, y - y0); if (dy > 0) { el.style.transform = `translate(-50%, ${Math.min(dy, 110) - 60}px)`; el.querySelector(".tx").textContent = dy > TH ? "Relâcher pour actualiser" : "Tirer pour actualiser"; } };
+  const end = async () => {
+    if (y0 === null) return; y0 = null;
+    if (dy > TH) {
+      busy = true; navigator.vibrate?.(15); el.classList.add("spin"); el.querySelector(".tx").textContent = "Actualisation…"; el.style.transform = "translate(-50%, 16px)";
+      const ok = await refresh(); el.classList.remove("spin"); el.querySelector(".tx").textContent = ok ? "À jour ✓" : "Hors-ligne — données locales";
+      setTimeout(() => { el.style.transform = "translate(-50%,-60px)"; busy = false; }, 700);
+    } else el.style.transform = "translate(-50%,-60px)";
+  };
+  addEventListener("touchstart", e => start(e.touches[0].clientY), {passive:true});
+  addEventListener("touchmove", e => move(e.touches[0].clientY), {passive:true});
+  addEventListener("touchend", end);
+  addEventListener("mousedown", e => { if (!e.target.closest("a,button,input,select,code,summary")) start(e.clientY); });
+  addEventListener("mousemove", e => { if (y0 !== null && e.buttons) move(e.clientY); });
+  addEventListener("mouseup", end);
+})();
+
+// Purge d'éventuels anciens service workers (mises à jour toujours visibles)
+navigator.serviceWorker?.getRegistrations?.().then(rs => rs.forEach(r => r.unregister()));
+
+readHash(); renderChrome(); render();
+if (location.protocol.startsWith("http")) refresh();
+</script>
+</body>
+</html>
