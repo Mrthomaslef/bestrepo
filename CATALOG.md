@@ -1,6 +1,6 @@
 # Catalogue BestRepo — dépôts recommandés pour les projets de Thomas
 
-_Généré le 2026-11-21 par scripts/build_data.py — ne pas éditer à la main (modifier scripts/curated.py)._
+_Généré le 2026-11-23 par scripts/build_data.py — ne pas éditer à la main (modifier scripts/curated.py)._
 
 Format : `owner/repo` (★ étoiles · niveau · type) — à quoi ça sert · **Pour Thomas :** usage · `démarrage`
 
@@ -13,14 +13,14 @@ _Faire tourner des modèles d'IA directement sur ton Mac, sans envoyer de donné
 - `open-webui/open-webui` ⭐ (★159k · moyen · selfhost) — Une interface type ChatGPT pour tes modèles locaux (Ollama) ou distants, avec documents et recherche. **Pour Thomas :** Ton « ChatGPT privé » : glisser un PDF de recommandations SFR/ESSR et poser des questions dessus en local. · `docker run -d -p 3000:8080 ghcr.io/open-webui/open-webui:main`
 - `Comfy-Org/ComfyUI` (★148k · moyen · app) — Génération d'images (Stable Diffusion, Flux…) par nœuds visuels. **Pour Thomas :** Créer les logos illustrés de tes apps du Tapp Store et des visuels de cours. · `Télécharger ComfyUI Desktop (macOS)`
 - `ggml-org/llama.cpp` (★136k · avancé · cli) — Le moteur d'inférence LLM en C/C++ optimisé Apple Silicon, à la base de la plupart des outils locaux. **Pour Thomas :** Pour aller plus loin qu'Ollama : quantification, serveur compatible OpenAI ultra léger. · `brew install llama.cpp`
-- `Mintplex-Labs/anything-llm` (★68k · facile · app) — App de bureau tout-en-un : discuter avec tes documents (RAG) avec n'importe quel modèle. **Pour Thomas :** Indexer ta biblio Zotero / tes cours et interroger l'ensemble en langage naturel. · `Télécharger l'app macOS sur anythingllm.com`
+- `Mintplex-Labs/anything-llm` (★69k · facile · app) — App de bureau tout-en-un : discuter avec tes documents (RAG) avec n'importe quel modèle. **Pour Thomas :** Indexer ta biblio Zotero / tes cours et interroger l'ensemble en langage naturel. · `Télécharger l'app macOS sur anythingllm.com`
 - `janhq/jan` (★46k · facile · app) — Alternative open-source à ChatGPT qui tourne 100 % hors-ligne. **Pour Thomas :** L'option la plus simple si tu veux une IA locale sans terminal. · `brew install --cask jan`
 - `ml-explore/mlx` (★29k · avancé · lib) — Le framework d'Apple pour le machine learning sur puces M1–M4. **Pour Thomas :** Entraîner ou affiner un petit modèle (classification d'images, quiz) en exploitant toute la puissance du Mac. · `pip install mlx mlx-lm`
 
 ## 🤖 Agents de code & Claude (`agents`)
 _Les outils qui te font gagner le plus de temps pour créer et maintenir tes web-apps (Tapp Store, Cochin RI, quiz…)._
 
-- `obra/superpowers` (★323k · moyen · extension) — Bibliothèque de skills qui imposent une méthode (spec → plan → tests → vérification) aux agents. **Pour Thomas :** Tu l'utilises déjà en partie (skill superpowers) : la source pour les mises à jour. · `/plugin install dans Claude Code`
+- `obra/superpowers` (★325k · moyen · extension) — Bibliothèque de skills qui imposent une méthode (spec → plan → tests → vérification) aux agents. **Pour Thomas :** Tu l'utilises déjà en partie (skill superpowers) : la source pour les mises à jour. · `/plugin install dans Claude Code`
 - `n8n-io/n8n` ⭐ (★212k · moyen · selfhost) — Automatisations visuelles type Zapier, avec nœuds IA, auto-hébergeable. **Pour Thomas :** « Nouveau mail du secrétariat → ligne dans l'Agenda RI → SMS de rappel » sans écrire de code. · `npx n8n`
 - `anthropics/claude-code` ⭐ (★157k · moyen · cli) — L'agent de code de Claude dans le terminal : lit, modifie, teste et pousse ton code. **Pour Thomas :** C'est déjà ton moteur via T3 Code. Le dépôt sert pour suivre les nouveautés, plugins et signaler des bugs. · `npm i -g @anthropic-ai/claude-code`
 - `x1xhlol/system-prompts-and-models-of-ai-tools` (★145k · facile · liste) — Collection des prompts système des grands outils IA (Cursor, v0, Claude…). **Pour Thomas :** S'inspirer pour écrire de meilleurs prompts pour tes propres assistants. · `Lire sur GitHub`
@@ -51,10 +51,10 @@ _Viewers, segmentation automatique et bibliothèques DICOM — directement utile
 ## 📚 Recherche, biblio & Second Brain (`savoir`)
 _Gérer articles, PDF et notes : BiblioOstéo, Zotero, Obsidian, extraction de texte des PDF._
 
-- `microsoft/markitdown` (★197k · moyen · cli) — Convertit presque tout (PDF, Office, images, audio) en Markdown pour les LLM. **Pour Thomas :** Préparer des documents pour les donner à Claude en contexte. · `pip install 'markitdown[all]'`
+- `microsoft/markitdown` (★198k · moyen · cli) — Convertit presque tout (PDF, Office, images, audio) en Markdown pour les LLM. **Pour Thomas :** Préparer des documents pour les donner à Claude en contexte. · `pip install 'markitdown[all]'`
 - `Stirling-Tools/Stirling-PDF` (★97k · moyen · selfhost) — Toutes les opérations PDF (fusion, découpe, OCR, signature, compression) en local. **Pour Thomas :** Remplace iLovePDF sans envoyer de documents sensibles sur Internet. · `docker run -p 8080:8080 stirlingtools/stirling-pdf`
 - `docling-project/docling` ⭐ (★71k · moyen · lib) — Convertit PDF/Word/PPT en Markdown propre (tableaux, figures, formules). **Pour Thomas :** Transformer des articles ou anciens cours PowerPoint en notes Obsidian exploitables. · `pip install docling`
-- `paperless-ngx/paperless-ngx` (★48k · moyen · selfhost) — Gestion documentaire : scan, OCR, tags automatiques, recherche. **Pour Thomas :** Une version auto-hébergée de ton coffre-fort de documents (impôts, contrats, fiches de paie). · `Docker (script d'installation dans le README)`
+- `paperless-ngx/paperless-ngx` (★49k · moyen · selfhost) — Gestion documentaire : scan, OCR, tags automatiques, recherche. **Pour Thomas :** Une version auto-hébergée de ton coffre-fort de documents (impôts, contrats, fiches de paie). · `Docker (script d'installation dans le README)`
 - `logseq/logseq` (★46k · facile · app) — Prise de notes en blocs reliés, open-source, local. **Pour Thomas :** Alternative à Obsidian pour un journal quotidien de vacation. · `brew install --cask logseq`
 - `datalab-to/marker` (★41k · moyen · cli) — PDF → Markdown très fidèle, rapide, avec OCR. **Pour Thomas :** Numériser des livres ou polycopiés scannés de radiologie. · `pip install marker-pdf`
 - `khoj-ai/khoj` (★38k · moyen · selfhost) — Assistant IA personnel qui cherche dans tes notes et documents. **Pour Thomas :** Interroger ton Second Brain Obsidian en langage naturel. · `pip install 'khoj[local]'`
@@ -84,11 +84,11 @@ _Remplacer des services payants par les tiens, sur le Mac ou un mini-serveur : p
 
 - `immich-app/immich` ⭐ (★120k · moyen · selfhost) — Alternative auto-hébergée à Google Photos : sauvegarde iPhone, reconnaissance faciale, recherche IA. **Pour Thomas :** Héberger les photos de famille (Émile !) sur le GamingSSD avec l'app iPhone, après ton export Google Takeout. · `docker compose (guide officiel immich.app)`
 - `louislam/uptime-kuma` (★95k · moyen · selfhost) — Surveille que tes sites/services répondent et t'alerte sinon. **Pour Thomas :** Être prévenu si une de tes apps GitHub Pages ou ton tunnel tombe. · `docker run -d -p 3001:3001 louislam/uptime-kuma`
-- `home-assistant/core` (★92k · moyen · selfhost) — La plateforme domotique open-source de référence. **Pour Thomas :** Piloter lumières, chauffage, ESP32 Xiaozhi, et créer des routines (coucher d'Émile, départ au travail). · `Home Assistant OS sur mini-PC ou Raspberry Pi`
+- `home-assistant/core` (★93k · moyen · selfhost) — La plateforme domotique open-source de référence. **Pour Thomas :** Piloter lumières, chauffage, ESP32 Xiaozhi, et créer des routines (coucher d'Émile, départ au travail). · `Home Assistant OS sur mini-PC ou Raspberry Pi`
 - `syncthing/syncthing` (★91k · facile · app) — Synchronisation de fichiers pair-à-pair, sans cloud. **Pour Thomas :** Garder ton Second Brain synchronisé entre plusieurs Mac sans iCloud. · `brew install --cask syncthing`
 - `pi-hole/pi-hole` (★62k · moyen · selfhost) — Bloqueur de pubs et traqueurs pour tout le réseau de la maison. **Pour Thomas :** Moins de pubs sur la TV, l'iPad d'Émile et tous les téléphones. · `Sur Raspberry Pi : curl -sSL https://install.pi-hole.net | bash`
 - `jellyfin/jellyfin` (★60k · moyen · selfhost) — Ton Netflix perso pour films et séries stockés chez toi. **Pour Thomas :** Regarder ta médiathèque du SSD sur la télé, l'iPad ou en voyage. · `brew install --cask jellyfin`
-- `tailscale/tailscale` ⭐ (★39k · facile · app) — VPN privé sans configuration entre tous tes appareils. **Pour Thomas :** Accéder à ton Mac (et au tunnel Mon Drive) depuis l'iPhone n'importe où, de façon sécurisée. · `brew install --cask tailscale`
+- `tailscale/tailscale` ⭐ (★40k · facile · app) — VPN privé sans configuration entre tous tes appareils. **Pour Thomas :** Accéder à ton Mac (et au tunnel Mon Drive) depuis l'iPhone n'importe où, de façon sécurisée. · `brew install --cask tailscale`
 - `gethomepage/homepage` (★34k · moyen · selfhost) — Tableau de bord élégant pour tous tes services. **Pour Thomas :** Page d'accueil maison regroupant Immich, Jellyfin, Home Assistant… · `Docker`
 - `78/xiaozhi-esp32` (★34k · avancé · lib) — Assistant vocal IA open-source sur ESP32. **Pour Thomas :** Le projet amont de ton Xiaozhi ESP32-S3 AMOLED : nouveautés et firmwares. · `Voir README (ESP-IDF)`
 - `FreshRSS/FreshRSS` (★17k · moyen · selfhost) — Lecteur de flux RSS auto-hébergé. **Pour Thomas :** Suivre les sommaires de Radiology, Skeletal Radiology, EJR et les blogs IA au même endroit. · `Docker`
@@ -163,11 +163,11 @@ _Budgets et patrimoine (banque, crypto, investissements) en gardant tes données
 ## 🎓 Apprendre & listes de référence (`apprendre`)
 _Les « awesome lists » et cours gratuits les plus étoilés de GitHub — des mines d'or à parcourir._
 
-- `sindresorhus/awesome` ⭐ (★540k · facile · liste) — La liste des listes « awesome » : le meilleur de chaque sujet. **Pour Thomas :** Point de départ pour explorer n'importe quel domaine (macOS, self-hosted, médical…). · `Lire sur GitHub`
+- `sindresorhus/awesome` ⭐ (★541k · facile · liste) — La liste des listes « awesome » : le meilleur de chaque sujet. **Pour Thomas :** Point de départ pour explorer n'importe quel domaine (macOS, self-hosted, médical…). · `Lire sur GitHub`
 - `public-apis/public-apis` (★501k · facile · liste) — Des centaines d'API gratuites (météo, transports, jours fériés…). **Pour Thomas :** Trouver une source de données pour une nouvelle app (météo pour Voyages-Voyages, jours fériés pour les plannings). · `Lire sur GitHub`
 - `EbookFoundation/free-programming-books` (★402k · facile · liste) — Des milliers de livres de programmation gratuits, dont en français. **Pour Thomas :** Apprendre Python ou JavaScript à ton rythme. · `Lire sur GitHub`
-- `nilbuild/developer-roadmap` (★372k · facile · liste) — Feuilles de route visuelles pour apprendre le dev (frontend, IA, DevOps…). **Pour Thomas :** Savoir quoi apprendre ensuite pour progresser sur tes apps. · `roadmap.sh`
-- `awesome-selfhosted/awesome-selfhosted` (★339k · facile · liste) — Le catalogue de tous les logiciels auto-hébergeables. **Pour Thomas :** Avant de payer un abonnement, vérifier s'il existe une alternative gratuite. · `Lire sur GitHub`
+- `nilbuild/developer-roadmap` (★373k · facile · liste) — Feuilles de route visuelles pour apprendre le dev (frontend, IA, DevOps…). **Pour Thomas :** Savoir quoi apprendre ensuite pour progresser sur tes apps. · `roadmap.sh`
+- `awesome-selfhosted/awesome-selfhosted` (★340k · facile · liste) — Le catalogue de tous les logiciels auto-hébergeables. **Pour Thomas :** Avant de payer un abonnement, vérifier s'il existe une alternative gratuite. · `Lire sur GitHub`
 - `microsoft/generative-ai-for-beginners` (★124k · moyen · liste) — 21 leçons gratuites sur l'IA générative. **Pour Thomas :** Base solide pour un cours IA aux internes. · `Lire sur GitHub`
 - `rasbt/LLMs-from-scratch` (★109k · avancé · liste) — Livre/cours pour comprendre et construire un LLM étape par étape. **Pour Thomas :** Comprendre vraiment comment marchent les IA que tu utilises tous les jours. · `Notebooks Jupyter`
 - `dair-ai/Prompt-Engineering-Guide` (★80k · facile · liste) — Guide complet du prompt engineering. **Pour Thomas :** Mieux formuler tes demandes aux agents. · `promptingguide.ai`
